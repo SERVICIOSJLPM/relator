@@ -1,14 +1,19 @@
 
-README - Tarjeta Digital
+# Tarjeta Digital - José Luis Paillapi
 
-Este paquete contiene un archivo index.html que representa una tarjeta digital profesional.
+Este proyecto contiene una tarjeta digital interactiva desarrollada en HTML y Tailwind CSS.
 
-Instrucciones para subir al hosting con cPanel:
-1. Inicia sesión en tu cPanel y ve al "Administrador de archivos".
-2. Navega a la carpeta public_html (o la carpeta deseada).
-3. Sube el archivo tarjeta_relator.zip.
-4. Haz clic derecho sobre el ZIP y selecciona "Extraer".
-5. Asegúrate de que el archivo index.html esté directamente en la carpeta deseada.
-6. Accede a tu tarjeta desde tu dominio. Ejemplo: https://tudominio.com/
+## Archivos incluidos
 
-Autor: José Luis Paillapi
+- **index.html**: Archivo principal que representa la tarjeta digital de José Luis Paillapi. Contiene toda la información personal, especialidades, herramientas, metodologías, y enlaces de contacto.
+- **README.txt**: Este archivo de descripción.
+
+## Cómo usar
+
+1. Sube `index.html` a la carpeta `public_html` de tu hosting con cPanel.
+2. Accede a tu dominio para ver la tarjeta digital en funcionamiento.
+
+El archivo es completamente estático y no necesita base de datos ni configuraciones adicionales.
+
+---
+Diseñado por José Luis Paillapi.
