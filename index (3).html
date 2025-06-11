@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="es"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Digital - José Luis Paillapi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        secondary: '#4F46E5',
+                        accent: '#06B6D4'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        .card-gradient {
+            background: linear-gradient(135deg, #5D5CDE 0%, #4F46E5 50%, #06B6D4 100%);
+        }
+        
+        .dark .card-gradient {
+            background: linear-gradient(135deg, #4C4BCA 0%, #3D36D1 50%, #0891B2 100%);
+        }
+        
+        .floating-animation {
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .skill-tag {
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(93, 92, 222, 0.3);
+        }
+        
+        .digital-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+        
+        .dark .digital-card {
+            background: #1F2937;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        }
+        
+        .profile-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .decorative-blob {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .credential-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .specialty-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .specialty-card {
+            background: #374151;
+            border: 1px solid #4b5563;
+        }
+        
+        .specialty-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .specialty-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-800 min-h-screen p-4 flex items-center justify-center transition-colors duration-300">
+    <!-- Theme Detection Script -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <div class="digital-card w-full">
+        <!-- Header con información principal -->
+        <div class="profile-section card-gradient text-white p-8 relative">
+            <!-- Elementos decorativos -->
+            <div class="decorative-blob w-24 h-24 -top-12 -right-12"></div>
+            <div class="decorative-blob w-16 h-16 -bottom-8 -left-8"></div>
+            
+            <div class="relative z-10">
+                <!-- Avatar y nombre -->
+                <div class="text-center mb-6">
+                    <div class="w-20 h-20 mx-auto mb-4 bg-white bg-opacity-20 rounded-full flex items-center justify-center floating-animation">
+                        <i class="fas fa-user-tie text-3xl text-white"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold mb-1">José Luis Paillapi</h1>
+                    <p class="text-sm opacity-90 font-medium">Relator y Profesor Especializado</p>
+                </div>
+
+                <!-- Credenciales principales -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="credential-badge text-center py-2 px-3 rounded-lg">
+                        <i class="fas fa-star text-yellow-300 text-sm mb-1"></i>
+                        <p class="text-xs font-semibold">10 años</p>
+                        <p class="text-xs opacity-80">Experiencia</p>
+                    </div>
+                    <div class="credential-badge text-center py-2 px-3 rounded-lg">
+                        <i class="fab fa-microsoft text-white text-sm mb-1"></i>
+                        <p class="text-xs font-semibold">Microsoft</p>
+                        <p class="text-xs opacity-80">Certificado</p>
+                    </div>
+                </div>
+
+                <!-- Grado académico destacado -->
+                <div class="text-center mb-4">
+                    <div class="credential-badge inline-flex items-center gap-2 py-2 px-4 rounded-full">
+                        <i class="fas fa-graduation-cap text-yellow-300"></i>
+                        <span class="text-sm font-semibold">Magíster en Educación</span>
+                    </div>
+                </div>
+
+                <!-- Información de contacto -->
+                <div class="space-y-2 text-center">
+                    <div class="credential-badge inline-flex items-center gap-2 py-2 px-3 rounded-lg">
+                        <i class="fas fa-envelope text-yellow-300 text-xs"></i>
+                        <span class="text-xs">jluispm2015@gmail.com</span>
+                    </div>
+                    <br>
+                    <div class="credential-badge inline-flex items-center gap-2 py-2 px-3 rounded-lg">
+                        <i class="fas fa-phone text-yellow-300 text-xs"></i>
+                        <span class="text-xs">+56 9 8171 8891</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Especialidades principales -->
+        <div class="p-6">
+            <h2 class="text-lg font-bold text-gray-800 dark:text-white mb-4 text-center">
+                Áreas de Especialización
+            </h2>
+            
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <div class="specialty-card p-3 text-center">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-language text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-800 dark:text-white">Idiomas</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Inglés</p>
+                </div>
+                
+                <div class="specialty-card p-3 text-center">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-purple-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-800 dark:text-white">Informática</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">TICs</p>
+                </div>
+                
+                <div class="specialty-card p-3 text-center">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-green-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-file-excel text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-800 dark:text-white">Ofimática</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Office 365</p>
+                </div>
+                
+                <div class="specialty-card p-3 text-center">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-red-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-800 dark:text-white">Inteligencia Artificial</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">IA &amp; ML</p>
+                </div>
+                
+                <div class="specialty-card p-3 text-center">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-indigo-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-drafting-compass text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-800 dark:text-white">Diseño Instruccional</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Educativo</p>
+                </div>
+                
+                <div class="specialty-card p-3 text-center">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-pink-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-code text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-800 dark:text-white">Diseño Web</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Frontend</p>
+                </div>
+                
+                <div class="specialty-card p-3 text-center">
+                    <div class="w-10 h-10 mx-auto mb-2 bg-teal-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-chalkboard-teacher text-white text-sm"></i>
+                    </div>
+                    <h3 class="text-xs font-bold text-gray-800 dark:text-white">Plataformas Educacionales</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">LMS &amp; E-learning</p>
+                </div>
+            </div>
+
+            <!-- Habilidades técnicas -->
+            <div class="mb-6">
+                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                    <i class="fas fa-tools text-primary text-sm"></i>
+                    Herramientas Principales
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded-md">Excel</span>
+                    <span class="skill-tag bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded-md">Power BI</span>
+                    <span class="skill-tag bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded-md">SharePoint</span>
+                    <span class="skill-tag bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded-md">Teams</span>
+                    <span class="skill-tag bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded-md">Word</span>
+                </div>
+            </div>
+
+            <!-- Metodologías -->
+            <div class="mb-6">
+                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                    <i class="fas fa-graduation-cap text-primary text-sm"></i>
+                    Metodologías
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 px-2 py-1 rounded-md">Andragogía</span>
+                    <span class="skill-tag bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-200 px-2 py-1 rounded-md">Flipped Learning</span>
+                    <span class="skill-tag bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 px-2 py-1 rounded-md">Gamificación</span>
+                    <span class="skill-tag bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 px-2 py-1 rounded-md">Diseño Instruccional</span>
+                </div>
+            </div>
+
+            <!-- Diplomados -->
+            <div class="mb-6">
+                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 flex items-center gap-2">
+                    <i class="fas fa-certificate text-primary text-sm"></i>
+                    Diplomados
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag bg-rose-100 dark:bg-rose-900 text-rose-800 dark:text-rose-200 px-2 py-1 rounded-md">Programación</span>
+                    <span class="skill-tag bg-sky-100 dark:bg-sky-900 text-sky-800 dark:text-sky-200 px-2 py-1 rounded-md">Contenidos Virtuales</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer con call to action -->
+        <div class="card-gradient text-white p-6 text-center">
+            <h3 class="text-lg font-bold mb-3">¿Interesado en mis servicios?</h3>
+            <p class="text-sm opacity-90 mb-4">Capacitaciones empresariales y cursos especializados</p>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <a href="mailto:jluispm2015@gmail.com?subject=Consulta%20por%20servicios%20de%20capacitación&amp;body=Hola%20José%20Luis,%0A%0AMe%20interesa%20conocer%20más%20sobre%20tus%20servicios%20de%20capacitación.%0A%0ASaludos" class="contact-btn text-white py-2 px-4 rounded-lg text-sm font-medium flex items-center justify-center gap-2 no-underline">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="tel:+56981718891" class="contact-btn text-white py-2 px-4 rounded-lg text-sm font-medium flex items-center justify-center gap-2 no-underline">
+                    <i class="fas fa-phone"></i>
+                    <span>Llamar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones de acción flotantes -->
+    <div class="fixed bottom-6 right-6 space-y-3">
+        <button onclick="shareCard()" class="w-12 h-12 bg-primary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110">
+            <i class="fas fa-share-alt"></i>
+        </button>
+        <button onclick="copyContact()" class="w-12 h-12 bg-accent text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center hover:scale-110" title="Copiar contacto">
+            <i class="fas fa-copy"></i>
+        </button>
+    </div>
+
+    <script>
+        // Función para compartir la tarjeta
+        function shareCard() {
+            const contactInfo = `José Luis Paillapi - Relator Profesional
+📧 jluispm2015@gmail.com
+📱 +56 9 8171 8891
+
+🎓 Magíster en Educación
+🏢 Certificación Microsoft Internacional
+⭐ 10 años de experiencia
+
+Especialista en:
+• Idiomas (Inglés todos los niveles)
+• Informática y TICs
+• Ofimática (Excel, Power BI, Office 365)
+• Inteligencia Artificial
+• Diseño Instruccional
+• Diseño Web
+• Plataformas Educacionales
+• Metodologías: Andragogía, Flipped Learning, Gamificación`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'José Luis Paillapi - Relator Profesional',
+                    text: contactInfo,
+                    url: window.location.href
+                });
+            } else {
+                // Copiar información de contacto al portapapeles
+                navigator.clipboard.writeText(contactInfo).then(() => {
+                    alert('¡Información de contacto copiada al portapapeles!');
+                }).catch(() => {
+                    // Fallback si no se puede copiar
+                    const textArea = document.createElement('textarea');
+                    textArea.value = contactInfo;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('¡Información de contacto copiada al portapapeles!');
+                });
+            }
+        }
+
+        // Función para copiar información de contacto
+        function copyContact() {
+            const contactText = `José Luis Paillapi
+Relator y Profesor Especializado
+📧 jluispm2015@gmail.com
+📱 +56 9 8171 8891
+
+🎓 Magíster en Educación
+🏢 Certificación Microsoft Internacional`;
+
+            navigator.clipboard.writeText(contactText).then(() => {
+                // Crear notificación visual
+                const notification = document.createElement('div');
+                notification.innerHTML = '✅ ¡Contacto copiado!';
+                notification.className = 'fixed bottom-20 right-6 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm font-medium';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 2000);
+            }).catch(() => {
+                alert('📋 Información de contacto:\n\nJosé Luis Paillapi\njluispm2015@gmail.com\n+56 9 8171 8891');
+            });
+        }
+
+        // Animaciones de entrada
+        window.addEventListener('load', function() {
+            const card = document.querySelector('.digital-card');
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px) scale(0.95)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0) scale(1)';
+            }, 100);
+        });
+
+        // Efecto hover para los tags
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) translateY(-1px)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) translateY(0)';
+            });
+        });
+    </script>
+
+
+
+</body></html>
